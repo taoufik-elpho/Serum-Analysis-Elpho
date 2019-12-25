@@ -1,14 +1,14 @@
-setwd("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/CODECOMBINING/results/")
+setwd("../")
 library(data.table)
 library(stringr)
 library(UpSetR)
 library(ComplexHeatmap)
-listsamples=unique(fread("../../../identification/samples.txt",header = F)$V1)
-listmkks=fread("../../../identification/MK_MKK.csv")
+listsamples=unique(fread("samples.txt",header = F)$V1)
+listmkks=fread("MK_MKK.csv")
 proteinscombinedbysamples=list()
 for(i in 1:length(listsamples)){
   mkk=listmkks[listmkks$`File ID`==str_split(listsamples[i],pattern = "_")[[1]][2],]$`MK/MKK`
-  combined=fread(paste0(listsamples[i],"_FDR_Protein_Peptide_Identification_v2.csv"))
+  combined=fread(paste0("Results/Identification/COMBINING/",listsamples[i],"_FDR_Protein_Peptide_Identification.csv"))
   combinedaccepted=paste(unique(combined[combined$fdrproteinlevel<0.01,]$protein),collapse = ",")
   proteinscombinedbysamples[[mkk]]<-combinedaccepted
 }
@@ -49,17 +49,15 @@ for(i in 1:length(proteincasecontrol)){
 close(pb)
 library(tidyverse)
 library(dplyr)
-fwrite(freqdf,"freqdf.csv",sep = "\t")
-freqdf=fread("freqdf.csv")
 freqdf$FreqControl=rowSums(freqdf%>%select(names(proteinscombinedbysamples)[grepl("MKK",names(proteinscombinedbysamples))]))
 freqdf$FreqCase=rowSums(freqdf%>%select(names(proteinscombinedbysamples)[!grepl("MKK",names(proteinscombinedbysamples))]))
 onlyincaseoronlyincontrol=freqdf[freqdf$FreqCase==0 | freqdf$FreqControl==0,]
 relativelyabondante=freqdf[abs(freqdf$FreqCase-freqdf$FreqControl)>4,]
-fwrite(relativelyabondante,"Protein_Relatively_Abondant_At_Leat_In_5_Samples_Group.csv")
+fwrite(relativelyabondante,"Protein_Relatively_Abundant_At_Least_In_5_Samples_Group.csv")
 relativelyabondante=relativelyabondante[relativelyabondante$FreqCase==0 | relativelyabondante$FreqControl==0,]
-fwrite(relativelyabondante,"Protein_Abondant_At_Leat_In_5_In_a_Sample_Group.csv")
+fwrite(relativelyabondante,"Protein_Abundant_At_Least_In_5_In_a_Sample_Group.csv")
 relativelyabondante=freqdf[abs(freqdf$FreqCase-freqdf$FreqControl)>5,]
-fwrite(relativelyabondante,"Protein_Relatively_Abondant_At_Leat_In_6_Samples_Group.csv")
+fwrite(relativelyabondante,"Protein_Relatively_Abundant_At_Least_In_6_Samples_Group.csv")
 relativelyabondante=relativelyabondante[relativelyabondante$FreqCase==0 | relativelyabondante$FreqControl==0,]
-fwrite(relativelyabondante,"Protein_Abondant_At_Leat_In_6_In_a_Sample_Group.csv")
+fwrite(relativelyabondante,"Protein_Abundant_At_Least_In_6_In_a_Sample_Group.csv")
 
