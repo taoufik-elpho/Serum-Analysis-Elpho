@@ -1,4 +1,4 @@
-setwd("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/")
+setwd("../")
 library(data.table)
 library(stringr)
 library(UpSetR)
@@ -11,9 +11,9 @@ for(i in 1:length(listsamples)){
   enginesidentification[[listmkks[listmkks$`File ID`==str_split(listsamples[i],pattern = "_")[[1]][2],]$`MK/MKK`]]=list()
   for(engine in engines){
     if(engine=="COMBINED"){
-      fdrfile=paste0("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/CODECOMBINING/results/",listsamples[i],"_FDR_Protein_Peptide_Identification_v2.csv")
+      fdrfile=paste0("Results/Identification/CODECOMBINING/",listsamples[i],"_FDR_Protein_Peptide_Identification.csv")
     }else{
-      fdrfile=paste0(engine,"/",listsamples[i],".MGF.zip_FDR_Protein_Peptide_Identification.csv")
+      fdrfile=paste0("Results/Identification/",engine,"/",listsamples[i],".MGF.zip_FDR_Protein_Peptide_Identification.csv")
     }
     fdrval=fread(fdrfile)
     fdrval$fdrpeptidelevel<-NULL
