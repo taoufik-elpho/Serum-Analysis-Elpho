@@ -1,4 +1,4 @@
-setwd("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/")
+setwd("../")
 library(data.table)
 library(stringr)
 library(UpSetR)
@@ -14,9 +14,9 @@ for(i in 1:length(listsamples)){
   espcounts=c()
   for(engine in engines){
     if(engine=="COMBINED"){
-      fdrfile=paste0("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/CODECOMBINING/results/",listsamples[i],"_FDR_Protein_Peptide_Identification_v2.csv")
+      fdrfile=paste0("Results/Identification/CODECOMBINING/",listsamples[i],"_FDR_Protein_Peptide_Identification.csv")
     }else{
-      fdrfile=paste0(engine,"/",listsamples[i],".MGF.zip_FDR_Protein_Peptide_Identification.csv")
+      fdrfile=paste0("Results/Identification/",engine,"/",listsamples[i],".MGF.zip_FDR_Protein_Peptide_Identification.csv")
     }
     
     fdrval=fread(fdrfile)
@@ -30,4 +30,4 @@ fwrite(proteinscount,paste0("Tables/Proteins_Count_Per_Sample_Engine_FDR_Protein
 controlcase=fread("control-case.csv")
 controlcase=controlcase[controlcase$Control%in%names(enginesidentification),]
 controlcase=controlcase[controlcase$Case%in%names(enginesidentification),]
-source("codesR/makeupsetscontrolvscase.R")
+source("makeupsetscontrolvscase.R")
