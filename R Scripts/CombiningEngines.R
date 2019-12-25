@@ -1,4 +1,4 @@
-setwd("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/")
+setwd("../")
 library(data.table)
 library(stringr)
 library(UpSetR)
@@ -14,7 +14,7 @@ proteinsidentidicationengine=data.frame()
 for(i in 1:length(listsamples)){
   proteinsidentidicationengine=data.frame()
   for(engine in engines){
-    protfile=paste0(engine,"/",listsamples[i],".MGF.zip_Protein_Peptide_Identification.csv")
+    protfile=paste0("Results/Identification/".engine,"/",listsamples[i],".MGF.zip_Protein_Peptide_Identification.csv")
     protdf=fread(protfile)
     proteinsidentidicationengine=rbind(proteinsidentidicationengine,protdf)
   }
