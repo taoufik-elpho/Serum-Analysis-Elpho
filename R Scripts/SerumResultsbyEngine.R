@@ -1,4 +1,4 @@
-setwd("/home/laptop/Desktop/serumanalaysi/pipeline/codes/new/sampledone/identification/")
+setwd("../")
 library(data.table)
 library(stringr)
 library(UpSetR)
@@ -13,7 +13,7 @@ for(i in 1:length(listsamples)){
   enginesidentification[[listmkks[listmkks$`File ID`==str_split(listsamples[i],pattern = "_")[[1]][2],]$`MK/MKK`]]=list()
   espcounts=c()
   for(engine in engines){
-    fdrfile=paste0(engine,"/",listsamples[i],".MGF.zip_FDR_Protein_Peptide_Identification.csv")
+    fdrfile=paste0("Results/Identification/",engine,"/",listsamples[i],".MGF.zip_FDR_Protein_Peptide_Identification.csv")
     fdrval=fread(fdrfile)
     fdrval=fdrval[fdrval$fdrproteinlevel<fdrseuil,]
     enginesidentification[[listmkks[listmkks$`File ID`==str_split(listsamples[i],pattern = "_")[[1]][2],]$`MK/MKK`]][[engine]]=unique(fdrval$protein)
@@ -25,4 +25,4 @@ fwrite(proteinscount,paste0("Tables/Proteins_Count_Per_Sample_Engine_FDR_Protein
 controlcase=fread("control-case.csv")
 controlcase=controlcase[controlcase$Control%in%names(enginesidentification),]
 controlcase=controlcase[controlcase$Case%in%names(enginesidentification),]
-source("codesR/makeupsetscontrolvscase.R")
+source("R Scripts/makeupsetscontrolvscase.R")
