@@ -11,7 +11,7 @@ fdr<-function(datahits){
   pb <- txtProgressBar(min = 0, max = total, style = 3)
   count=1
   for(protein in proteins){
-      datahitsprotein=datahits[datahits$protein==proteins[2],]
+      datahitsprotein=datahits[datahits$protein==protein,]
       fdrproteinlevel= c( fdrproteinlevel,dim(datahitsprotein[datahitsprotein$decoy==TRUE,])[1]/dim(datahitsprotein)[1]) 
       setTxtProgressBar(pb, count)
       count=count+1
