@@ -69,7 +69,7 @@ process identify_comet {
         file 'FDR_Protein_Peptide_Identification.csv' into fdroutscomet
     script:
         """
-        Rscript /home/taoufik/data/identification.R  file "${params.indir}/SearchGui/COMET/${mgfbn}" engine "comet"  
+        Rscript /home/taoufik/data/ParsingEnginesResults.R  file "${params.indir}/SearchGui/COMET/${mgfbn}" engine "comet"  
        cp FDR_Protein_Peptide_Identification.csv "${params.outdir}/COMET/${mgfbn}_FDR_Protein_Peptide_Identification.csv" 
        cp Protein_Peptide_Identification.csv "${params.outdir}/COMET/${mgfbn}_Protein_Peptide_Identification.csv" 
          
