@@ -3,7 +3,10 @@ Nextflow and R scripts used for Female Stress Urinary Incontinence
 # Workflow
 ![GitHub Logo](pipline-final.png)
 # Samples Metadata
-* control-case.csv: Mapping control to case Samples 
+* Control-Case.csv: Mapping control to case Samples 
 * MK_MKK.csv: Mapping file id to sample id
-* samples.txt: Samples names
-
+* Samples.txt: Samples names
+# Folders description
+* R Scripts: R scripts used for needed operations and reproducing the manuscript figures and tables
+* Nextflow_Pipeline: Nextflow sources for the MS search stage, parsing results and combining engines results 
+* Tables: Reported tables
