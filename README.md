@@ -1,5 +1,5 @@
 # Serum-Analysis-Elpho
-Nextflow and R scripts used for Female Stress Urinary Incontinence
+Nextflow and R scripts used for analyzing female Stress Urinary Incontinence dataset for increasing protein identification accuracy.
 # Workflow
 ![GitHub Logo](pipline-final.png)
 # Samples Metadata
