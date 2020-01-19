@@ -30,4 +30,4 @@ fwrite(proteinscount,paste0("Tables/Proteins_Count_Per_Sample_Engine_FDR_Protein
 controlcase=fread("control-case.csv")
 controlcase=controlcase[controlcase$Control%in%names(enginesidentification),]
 controlcase=controlcase[controlcase$Case%in%names(enginesidentification),]
-source("R scripts/MakeUpsetsControlvsCaseFigures.R")
+source("R Scripts/MakeUpsetsControlvsCaseFigures.R")
